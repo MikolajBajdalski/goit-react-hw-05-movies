@@ -1,0 +1,22 @@
+.reviewsContainer {
+  padding: 20px;
+}
+
+.review {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.author {
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.content {
+  white-space: pre-line;
+}
+
+.noReviews {
+  font-style: italic;
+}

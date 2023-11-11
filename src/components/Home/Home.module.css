@@ -1,0 +1,54 @@
+.container {
+  text-align: left;
+  margin: 20px;
+}
+
+.headerNav {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+}
+
+.navList {
+  display: flex;
+  padding: 0;
+}
+
+.headerNavItem {
+  list-style-type: none;
+  padding: 0 15px;
+}
+
+.headerLink {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.title {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+.movieList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.movieItem {
+  padding: 5px 0;
+}
+
+.movieLink {
+  text-decoration: none;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.movieLink:hover {
+  color: #000;
+}

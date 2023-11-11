@@ -1,0 +1,73 @@
+.container {
+  padding: 20px;
+}
+
+.searchBar {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 10px;
+  margin-right: 10px;
+  width: 300px; /* Adjust width as necessary */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+}
+
+.movieList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.movieItem {
+  padding: 10px 0;
+}
+
+.movieLink {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.movieLink:hover {
+  color: #007bff;
+}
+
+/* ... (inne style) ... */
+
+.header {
+  background-color: #f8f9fa; /* Light grey background */
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between links */
+}
+
+.link {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ... (inne style) ... */
