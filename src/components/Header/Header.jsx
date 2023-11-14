@@ -1,10 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
-const Header = ({ activeLink }) => {
-  const getActiveClass = linkName => {
-    return activeLink === linkName ? styles.active : '';
+const Header = () => {
+  const location = useLocation();
+
+  const getLinkClass = path => {
+    return location.pathname === path ? styles.active : styles.navLink;
   };
 
   return (
@@ -12,12 +14,12 @@ const Header = ({ activeLink }) => {
       <nav>
         <ul className={styles.navList}>
           <li className={styles.navItem}>
-            <NavLink to="/" className={getActiveClass('home')}>
+            <NavLink to="/" className={getLinkClass('/')}>
               Home
             </NavLink>
           </li>
           <li className={styles.navItem}>
-            <NavLink to="/movies" className={getActiveClass('movies')}>
+            <NavLink to="/movies" className={getLinkClass('/movies')}>
               Movies
             </NavLink>
           </li>

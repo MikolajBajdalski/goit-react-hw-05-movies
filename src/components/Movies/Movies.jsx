@@ -5,10 +5,16 @@ import styles from './Movies.module.css'; // Zaimportuj moduł stylów
 const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-const Movies = () => {
+const Movies = ({ onNavigate }) => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (onNavigate) {
+      onNavigate();
+    }
+  }, [onNavigate]);
 
   useEffect(() => {
     if (query) {
