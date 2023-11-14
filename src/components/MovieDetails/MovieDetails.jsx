@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import styles from './MovieDetails.module.css';
+import { Outlet } from 'react-router-dom';
 
 const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -59,19 +60,20 @@ const MovieDetails = () => {
           <p>{movie.overview}</p>
           <h3>Genres</h3>
           <p>{movie.genres.map(genre => genre.name).join(' ')}</p>
-          <div className={styles.additionalInfo}></div>
         </div>
       </div>
-      <p>Additional information</p>
-      <ul>
-        {' '}
-        <li>
-          <Link to={`/movies/${id}/cast`}>Cast</Link>
-        </li>
-        <li>
-          <Link to={`/movies/${id}/reviews`}>Reviews</Link>
-        </li>
-      </ul>
+      <div className={styles.additionalInfo}>
+        <p>Additional information</p>
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+      </div>
+      <Outlet />
     </div>
   );
 };

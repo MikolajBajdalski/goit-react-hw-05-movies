@@ -6,13 +6,13 @@ const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const Reviews = () => {
-  const { movieId } = useParams();
+  const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const url = `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US`;
+        const url = `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`;
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -25,7 +25,7 @@ const Reviews = () => {
     };
 
     fetchReviews();
-  }, [movieId]);
+  }, [id]);
 
   if (!reviews.length) {
     return (
