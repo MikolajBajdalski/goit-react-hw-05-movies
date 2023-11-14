@@ -6,13 +6,13 @@ const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const MovieDetails = () => {
-  const { movieId } = useParams();
+  const { id } = useParams(); // Zmienione z movieId na id
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+        const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`; // Zmienione z movieId na id
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -24,8 +24,11 @@ const MovieDetails = () => {
       }
     };
 
-    fetchMovie();
-  }, [movieId]);
+    if (id) {
+      // Dodane sprawdzenie, czy id istnieje
+      fetchMovie();
+    }
+  }, [id]); // Zmienione z movieId na id
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -33,11 +36,6 @@ const MovieDetails = () => {
 
   return (
     <div className={styles.container}>
-      <nav className={styles.navigation}>
-        <Link to="/">Home</Link>
-        <span> | </span>
-        <Link to="/movies">Movies</Link>
-      </nav>
       <div className={styles.goBack}>
         <Link to="/movies">&larr; Go back</Link>
       </div>
@@ -64,10 +62,10 @@ const MovieDetails = () => {
       <ul>
         {' '}
         <li>
-          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+          <Link to={`/movies/${id}/cast`}>Cast</Link>
         </li>
         <li>
-          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          <Link to={`/movies/${id}/reviews`}>Reviews</Link>
         </li>
       </ul>
     </div>

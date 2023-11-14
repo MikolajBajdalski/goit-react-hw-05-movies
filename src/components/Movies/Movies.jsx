@@ -43,16 +43,6 @@ const Movies = () => {
 
   return (
     <div>
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <Link to="/" className={styles.link}>
-            Home
-          </Link>
-          <Link to="/movies" className={styles.link}>
-            Movies
-          </Link>
-        </nav>
-      </header>
       <div className={styles.searchBar}>
         <form onSubmit={handleSearchSubmit}>
           <input
