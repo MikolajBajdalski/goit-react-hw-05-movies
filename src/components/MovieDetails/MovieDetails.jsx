@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import styles from './MovieDetails.module.css';
 
 const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const MovieDetails = () => {
-  const { id } = useParams(); // Zmienione z movieId na id
+  const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`; // Zmienione z movieId na id
+        const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`;
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -25,10 +26,13 @@ const MovieDetails = () => {
     };
 
     if (id) {
-      // Dodane sprawdzenie, czy id istnieje
       fetchMovie();
     }
-  }, [id]); // Zmienione z movieId na id
+  }, [id]);
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -37,7 +41,7 @@ const MovieDetails = () => {
   return (
     <div className={styles.container}>
       <div className={styles.goBack}>
-        <Link to="/movies">&larr; Go back</Link>
+        <button onClick={goBack}>&larr; Go back</button>
       </div>
       <div className={styles.movieDetails}>
         <div className={styles.movieImage}>
