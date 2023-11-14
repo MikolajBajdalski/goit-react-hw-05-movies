@@ -33,20 +33,6 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <header className={styles.headerNav}>
-        <ul className={styles.navList}>
-          <li className={styles.headerNavItem}>
-            <Link className={styles.headerLink} to="/">
-              Home
-            </Link>
-          </li>
-          <li className={styles.headerNavItem}>
-            <Link className={styles.headerLink} to="/movies">
-              Movies
-            </Link>
-          </li>
-        </ul>
-      </header>
       <h2 className={styles.title}>Trending today</h2>
       <ul className={styles.movieList}>
         {movies.map(movie => (
