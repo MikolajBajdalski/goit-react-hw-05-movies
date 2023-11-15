@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
+import { NavigationProvider } from '../contexts/NavigationContext';
 import Header from './Header/Header';
 
 const Home = lazy(() => import('./Home/Home'));
@@ -21,33 +22,35 @@ function App() {
   };
 
   return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Header activeLink={activeLink} />
-        <Routes>
-          <Route
-            path="/"
-            element={<Home onNavigate={() => handleNavigation('home')} />}
-          />
-          <Route
-            path="/movies"
-            element={<Movies onNavigate={() => handleNavigation('movies')} />}
-          />
-          <Route
-            path="/movies/:id"
-            element={
-              <MovieDetails
-                onNavigate={() => handleNavigation('movieDetails')}
-              />
-            }
-          >
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <NavigationProvider>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header activeLink={activeLink} />
+          <Routes>
+            <Route
+              path="/"
+              element={<Home onNavigate={() => handleNavigation('home')} />}
+            />
+            <Route
+              path="/movies"
+              element={<Movies onNavigate={() => handleNavigation('movies')} />}
+            />
+            <Route
+              path="/movies/:id"
+              element={
+                <MovieDetails
+                  onNavigate={() => handleNavigation('movieDetails')}
+                />
+              }
+            >
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </NavigationProvider>
   );
 }
 

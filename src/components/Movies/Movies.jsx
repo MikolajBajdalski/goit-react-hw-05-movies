@@ -1,24 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './Movies.module.css'; // Zaimportuj moduł stylów
+import { Link, useSearchParams } from 'react-router-dom';
+import styles from './Movies.module.css';
+import { useNavigation } from 'contexts/NavigationContext';
 
 const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-const Movies = ({ onNavigate }) => {
-  const [query, setQuery] = useState('');
+const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';
+  const { updateReferrer } = useNavigation();
 
   useEffect(() => {
-    if (onNavigate) {
-      onNavigate();
+    updateReferrer('movies');
+  }, [updateReferrer]);
+
+  const handleSearch = async event => {
+    event.preventDefault();
+    const searchQuery = event.target.elements.query.value;
+    setSearchParams({ query: searchQuery });
+    if (searchQuery) {
+      try {
+        const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+          searchQuery
+        )}`;
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMovies(data.results);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
-  }, [onNavigate]);
+  };
 
   useEffect(() => {
-    if (query) {
-      const fetchMovies = async () => {
+    const fetchMovies = async () => {
+      if (query) {
         try {
           const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
             query
@@ -32,31 +53,21 @@ const Movies = ({ onNavigate }) => {
         } catch (error) {
           console.error('Error:', error);
         }
-      };
+      }
+    };
 
-      fetchMovies();
-    }
+    fetchMovies();
   }, [query]);
-
-  const handleSearchChange = event => {
-    setQuery(event.target.value);
-  };
-
-  const handleSearchSubmit = event => {
-    event.preventDefault();
-    navigate(`/movies?query=${query}`);
-  };
 
   return (
     <div>
       <div className={styles.searchBar}>
-        <form onSubmit={handleSearchSubmit}>
+        <form onSubmit={handleSearch}>
           <input
             type="text"
-            value={query}
-            onChange={handleSearchChange}
             placeholder="Search for a movie..."
             className={styles.searchInput}
+            name="query"
           />
           <button type="submit" className={styles.searchButton}>
             Search

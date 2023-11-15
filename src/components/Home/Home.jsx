@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
+import { useNavigation } from 'contexts/NavigationContext';
 
 const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const Home = ({ onNavigate }) => {
   const [movies, setMovies] = useState([]);
+  const { updateReferrer } = useNavigation();
 
   useEffect(() => {
-    if (onNavigate) {
-      onNavigate();
-    }
-  }, [onNavigate]);
+    updateReferrer('home');
+  }, [updateReferrer]);
 
   useEffect(() => {
     const fetchMovies = async endpoint => {

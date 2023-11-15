@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import styles from './MovieDetails.module.css';
 import { Outlet } from 'react-router-dom';
+import { useNavigation } from 'contexts/NavigationContext';
 
 const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -9,6 +10,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const { referrer } = useNavigation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +34,11 @@ const MovieDetails = () => {
   }, [id]);
 
   const goBack = () => {
-    navigate(-1);
+    if (referrer === 'home') {
+      navigate('/home');
+    } else if (referrer === 'movies') {
+      navigate('/movies');
+    }
   };
 
   if (!movie) {
@@ -55,7 +61,7 @@ const MovieDetails = () => {
           <h1>
             {movie.title} ({new Date(movie.release_date).getFullYear()})
           </h1>
-          <p>User Score: {movie.vote_average * 10}%</p>
+          <p>User Score: {Math.round(movie.vote_average * 10)}%</p>
           <h2>Overview</h2>
           <p>{movie.overview}</p>
           <h3>Genres</h3>
