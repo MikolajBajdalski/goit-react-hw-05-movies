@@ -1,13 +1,14 @@
-import React, { Suspense, lazy, useState } from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
   Routes,
+  Route,
   Navigate,
 } from 'react-router-dom';
 import { NavigationProvider } from '../contexts/NavigationContext';
 import Header from './Header/Header';
 
+// Lazy loading components
 const Home = lazy(() => import('./Home/Home'));
 const Movies = lazy(() => import('./Movies/Movies'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
@@ -15,34 +16,15 @@ const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 function App() {
-  const [activeLink, setActiveLink] = useState('home');
-
-  const handleNavigation = link => {
-    setActiveLink(link);
-  };
-
   return (
     <NavigationProvider>
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
-          <Header activeLink={activeLink} />
+          <Header />
           <Routes>
-            <Route
-              path="/"
-              element={<Home onNavigate={() => handleNavigation('home')} />}
-            />
-            <Route
-              path="/movies"
-              element={<Movies onNavigate={() => handleNavigation('movies')} />}
-            />
-            <Route
-              path="/movies/:id"
-              element={
-                <MovieDetails
-                  onNavigate={() => handleNavigation('movieDetails')}
-                />
-              }
-            >
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:id" element={<MovieDetails />}>
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
