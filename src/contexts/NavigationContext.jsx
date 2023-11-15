@@ -6,13 +6,20 @@ export const useNavigation = () => useContext(NavigationContext);
 
 export const NavigationProvider = ({ children }) => {
   const [referrer, setReferrer] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const updateReferrer = path => {
     setReferrer(path);
   };
 
+  const updateSearchQuery = query => {
+    setSearchQuery(query);
+  };
+
   return (
-    <NavigationContext.Provider value={{ referrer, updateReferrer }}>
+    <NavigationContext.Provider
+      value={{ referrer, updateReferrer, searchQuery, updateSearchQuery }}
+    >
       {children}
     </NavigationContext.Provider>
   );

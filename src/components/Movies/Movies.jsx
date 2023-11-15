@@ -10,7 +10,7 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
-  const { updateReferrer } = useNavigation();
+  const { updateReferrer, updateSearchQuery } = useNavigation();
 
   useEffect(() => {
     updateReferrer('movies');
@@ -20,6 +20,7 @@ const Movies = () => {
     event.preventDefault();
     const searchQuery = event.target.elements.query.value;
     setSearchParams({ query: searchQuery });
+    updateSearchQuery(searchQuery);
     if (searchQuery) {
       try {
         const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(

@@ -8,9 +8,11 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const Reviews = () => {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchReviews = async () => {
+      setIsLoading(true);
       try {
         const url = `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`;
         const response = await fetch(url);
@@ -21,11 +23,17 @@ const Reviews = () => {
         setReviews(data.results);
       } catch (error) {
         console.error('Error:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchReviews();
   }, [id]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (!reviews.length) {
     return (

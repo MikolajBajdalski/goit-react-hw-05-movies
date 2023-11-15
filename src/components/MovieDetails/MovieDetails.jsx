@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import styles from './MovieDetails.module.css';
 import { Outlet } from 'react-router-dom';
 import { useNavigation } from 'contexts/NavigationContext';
@@ -10,7 +10,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
-  const { referrer } = useNavigation();
+  const { referrer, searchQuery } = useNavigation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,11 +33,11 @@ const MovieDetails = () => {
     }
   }, [id]);
 
-  const goBack = () => {
-    if (referrer === 'home') {
+  const handleGoBack = () => {
+    if (referrer === 'movies' && searchQuery) {
+      navigate(`/movies?query=${searchQuery}`);
+    } else if (referrer === 'home') {
       navigate('/home');
-    } else if (referrer === 'movies') {
-      navigate('/movies');
     }
   };
 
@@ -48,7 +48,7 @@ const MovieDetails = () => {
   return (
     <div className={styles.container}>
       <div className={styles.goBack}>
-        <button onClick={goBack}>&larr; Go back</button>
+        <button onClick={handleGoBack}>&larr; Go back</button>
       </div>
       <div className={styles.movieDetails}>
         <div className={styles.movieImage}>
