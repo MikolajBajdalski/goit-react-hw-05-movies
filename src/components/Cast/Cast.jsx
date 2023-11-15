@@ -6,13 +6,13 @@ const API_KEY = '35a34ce8f38b4fede9b5661b8e9c4e2f';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const Cast = () => {
-  const { movieId } = useParams();
+  const { id } = useParams();
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
     const fetchCast = async () => {
       try {
-        const url = `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`;
+        const url = `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`;
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -25,7 +25,7 @@ const Cast = () => {
     };
 
     fetchCast();
-  }, [movieId]);
+  }, [id]);
 
   return (
     <div className={styles.castContainer}>
