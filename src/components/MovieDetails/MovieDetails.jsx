@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import styles from './MovieDetails.module.css';
 import { Outlet } from 'react-router-dom';
 import { useNavigation } from 'contexts/NavigationContext';
