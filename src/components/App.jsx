@@ -8,7 +8,6 @@ import {
 import { NavigationProvider } from '../contexts/NavigationContext';
 import Header from './Header/Header';
 
-// Lazy loading components
 const Home = lazy(() => import('./Home/Home'));
 const Movies = lazy(() => import('./Movies/Movies'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
