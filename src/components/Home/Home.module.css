@@ -1,54 +1,55 @@
 .container {
-  text-align: left;
-  margin: 20px;
-}
-
-.headerNav {
-  display: flex;
-  gap: 20px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid black;
-  margin-bottom: 20px;
-}
-
-.navList {
-  display: flex;
-  padding: 0;
-}
-
-.headerNavItem {
-  list-style-type: none;
-  padding: 0 15px;
-}
-
-.headerLink {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+  padding: 40px;
 }
 
 .title {
-  margin: 0;
-  padding-bottom: 10px;
-  font-size: 24px;
-  color: #333;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #61dafb;
 }
 
 .movieList {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 .movieItem {
-  padding: 5px 0;
+  background-color: #3a3f4b;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.movieLink {
+.movieItem a {
   text-decoration: none;
-  color: #555;
-  transition: color 0.3s;
+}
+.movieItem:hover {
+  background-color: #4b5161;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.movieLink:hover {
-  color: #000;
+.movieImage {
+  width: 100%;
+  height: auto;
+  min-height: 333px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.movieTitle {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.movieTitle:hover {
+  color: #f39c12;
 }

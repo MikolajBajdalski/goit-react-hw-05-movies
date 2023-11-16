@@ -1,3 +1,5 @@
+// Movies.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styles from './Movies.module.css';
@@ -61,7 +63,7 @@ const Movies = () => {
   }, [query]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.searchBar}>
         <form onSubmit={handleSearch}>
           <input
@@ -79,7 +81,14 @@ const Movies = () => {
         {movies.map(movie => (
           <li key={movie.id} className={styles.movieItem}>
             <Link to={`/movies/${movie.id}`} className={styles.movieLink}>
-              {movie.title || movie.name}
+              <img
+                className={styles.movieImage}
+                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <span className={styles.movieTitle}>
+                {movie.title || movie.name}
+              </span>
             </Link>
           </li>
         ))}

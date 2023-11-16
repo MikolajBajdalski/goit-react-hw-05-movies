@@ -10,15 +10,15 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={styles.headerContainer}>
       <nav>
-        <ul className={styles.navList}>
-          <li className={styles.navItem}>
+        <ul className={styles.navItems}>
+          <li>
             <NavLink to="/" className={getLinkClass('/')}>
               Home
             </NavLink>
           </li>
-          <li className={styles.navItem}>
+          <li>
             <NavLink to="/movies" className={getLinkClass('/movies')}>
               Movies
             </NavLink>
